@@ -26,7 +26,7 @@ class KsemMqtt():
         self.mqtt_port = int(os.environ.get('mqtt_client_port',''))
         self.mqtt_topic = os.environ.get('mqtt_client_root_topic','')
         self.mqtt_qos = int(os.environ.get('mqtt_qos',''))
-        self.mqtt_retain = os.environ.get('mqtt_retain','')
+        self.mqtt_retain = eval(os.environ.get('mqtt_retain',''))
         
         if eval(os.environ.get('mqtt_auth','')):
             self.mqtt_username = os.environ.get('mqtt_username','')

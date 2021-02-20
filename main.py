@@ -652,7 +652,7 @@ handler = logging.handlers.RotatingFileHandler("/var/log/ksem-mqtt.log", maxByte
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-ksem = KsemMqtt(debug=DEBUG)
+ksem = KsemMqtt()
 ksem.init(logger)
 ksem.logger = logger
 ksem.run()

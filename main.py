@@ -638,7 +638,7 @@ class KsemMqtt():
                 if len(msgs) > 0:
                     publish.multiple(msgs, hostname=self.mqtt_host, port=self.mqtt_port, client_id=self.mqtt_client_id, auth=self.mqtt_auth)
 
-            except Exception, ex:
+            except Exception as ex:
                 self.logger.info("Exception: ", ex)
                 pass
 #-----------------------------

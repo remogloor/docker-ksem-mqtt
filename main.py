@@ -19,13 +19,13 @@ DEBUG = 0
 class KsemMqtt():
     def init(self, logger):
         self.ksem_hostname = os.environ.get('ksem_hostname','')
-        self.ksem_port = os.environ.get('ksem_port','')
+        self.ksem_port = int(os.environ.get('ksem_port',''))
         
         self.mqtt_client_id = os.environ.get('mqtt_client_id','')
         self.mqtt_host = os.environ.get('mqtt_client_host','')
-        self.mqtt_port = os.environ.get('mqtt_client_port','')
+        self.mqtt_port = int(os.environ.get('mqtt_client_port',''))
         self.mqtt_topic = os.environ.get('mqtt_client_root_topic','')
-        self.mqtt_qos = os.environ.get('mqtt_qos','')
+        self.mqtt_qos = int(os.environ.get('mqtt_qos',''))
         self.mqtt_retain = os.environ.get('mqtt_retain','')
         
         if eval(os.environ.get('mqtt_auth','')):

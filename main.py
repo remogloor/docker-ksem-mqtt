@@ -648,7 +648,7 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s: %(name)s %(levelname
 logger = logging.getLogger(__name__)
 logger.level = logging.INFO
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-handler = logging.handlers.RotatingFileHandler("/var/log/ksem-mqtt.log", maxBytes=10000000, backupCount=4)
+handler = logging.handlers.RotatingFileHandler("/log/ksem-mqtt.log", maxBytes=10000000, backupCount=4)
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 

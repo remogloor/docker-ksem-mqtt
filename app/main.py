@@ -17,7 +17,7 @@ LOOP_SLEEP = 600
 DEBUG = 0
 
 class KsemMqtt():
-    def init(self, logger):
+    def init(self, logger, statuslogger):
         self.ksem_hostname = os.environ.get('ksem_hostname','')
         self.ksem_port = int(os.environ.get('ksem_port',''))
         
@@ -38,6 +38,7 @@ class KsemMqtt():
             self.mqtt_auth = None
 
         self.logger = logger
+        self.statuslogger = statuslogger
         
         #No more changes required beyond this point
         self.KostalRegister = []
@@ -471,9 +472,12 @@ class KsemMqtt():
                           
         
     def run(self):
+        self.statuslogger.info("Running")
+        self.logger.info("Running")
+        
         sendCounter = 0
         while True:
-            self.logger.info("Looping")
+            self.statuslogger.info("Looping")
             sleep(1)
 
             try:        
@@ -652,7 +656,14 @@ handler = logging.handlers.RotatingFileHandler("/log/ksem-mqtt.log", maxBytes=10
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
+statuslogger = logging.getLogger("status")
+statuslogger.level = logging.INFO
+statushandler = logging.handlers.RotatingFileHandler("/log/ksem-mqtt-status.log", maxBytes=1000000, backupCount=2)
+statushandler.setFormatter(formatter)
+statuslogger.addHandler(statushandler)
+
 ksem = KsemMqtt()
-ksem.init(logger)
+ksem.init(logger, statuslogger)
 ksem.logger = logger
+ksem.statuslogger = statuslogger
 ksem.run()
